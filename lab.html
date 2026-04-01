@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>稳界学堂 - 风险认知实验室</title>
+    <link rel="stylesheet" href="lab.css">
+</head>
+<body>
+    <header class="lab-header">
+        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">⬅ 返回主页</a></div>
+        <div class="user-assets">
+            模拟人民币账户: <span id="cny-balance" class="highlight">¥100,000.00</span>
+        </div>
+    </header>
+
+    <div class="dashboard">
+        <main class="main-panel">
+            <section class="market-section">
+                <h2>实时市场行情 (模拟现实数据)</h2>
+                <div class="coin-list">
+                    <div class="coin-card">
+                        <h3>USDT (泰达币)</h3>
+                        <p>当前价格: <span id="price-usdt">¥7.24</span></p>
+                        <button onclick="openTrade('USDT')">交易</button>
+                    </div>
+                    <div class="coin-card">
+                        <h3>USDC (美元币)</h3>
+                        <p>当前价格: <span id="price-usdc">¥7.25</span></p>
+                        <button onclick="openTrade('USDC')">交易</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="trade-panel" class="trade-panel hidden">
+                <h2 id="trade-title">买入稳定币</h2>
+                <div class="trade-form">
+                    <label>交易数量:</label>
+                    <input type="number" id="trade-amount" placeholder="输入数量" min="1">
+                    <p>预计花费: <span id="trade-cost">¥0.00</span></p>
+                    <button id="btn-execute" class="btn-primary">确认买入</button>
+                    <button onclick="closeTrade()" class="btn-secondary">取消</button>
+                </div>
+            </section>
+
+            <section class="edu-section">
+                <h2>新手合规小课堂 📺</h2>
+                <div class="video-container">
+                    <div class="video-placeholder">
+                        ▶ 点击播放《认识稳定币与非法集资风险》
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <aside class="side-panel">
+            <h2>我的数字资产</h2>
+            <ul class="holdings-list">
+                <li>USDT: <span id="hold-usdt">0.00</span></li>
+                <li>USDC: <span id="hold-usdc">0.00</span></li>
+            </ul>
+            <button onclick="resetAccount()" class="btn-danger" style="margin-top: 20px;">重置账户 (重新领取十万)</button>
+        </aside>
+    </div>
+
+    <div id="tutorial-overlay" class="tutorial-overlay active">
+        <div class="tutorial-box">
+            <h2>🎉 欢迎来到风险认知实验室！</h2>
+            <p>我们已经向你的账户发放了 <strong>¥100,000</strong> 模拟本金。</p>
+            <p><strong>任务：</strong>尝试根据现实汇率，买入一些 USDT，并观看下方的合规教育视频，了解交易背后的法律风险。</p>
+            <button onclick="closeTutorial()" class="btn-primary">领取资金，开始挑战</button>
+        </div>
+    </div>
+
+    <script src="lab.js"></script>
+</body>
+</html>
