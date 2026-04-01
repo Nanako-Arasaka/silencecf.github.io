@@ -8,67 +8,124 @@
 </head>
 <body>
     <header class="lab-header">
-        <div class="logo"><a href="index.html" style="color:white; text-decoration:none;">⬅ 返回主页</a></div>
-        <div class="user-assets">
-            模拟人民币账户: <span id="cny-balance" class="highlight">¥100,000.00</span>
+        <div class="logo"><a href="index.html">⬅ 返回主页</a> | 风险认知实验室</div>
+        <div class="user-status">
+            <div class="status-item">学习积分: <span id="user-points" class="text-blue">0</span></div>
+            <div class="status-item">模拟本金: <span id="cny-balance" class="text-green">¥100,000.00</span></div>
+            <div class="avatar-box" id="user-avatar">🧑‍🎓</div>
         </div>
     </header>
 
-    <div class="dashboard">
-        <main class="main-panel">
-            <section class="market-section">
-                <h2>实时市场行情 (模拟现实数据)</h2>
+    <div class="dashboard-grid">
+        <aside class="col-left">
+            <section class="panel">
+                <div class="panel-header">📈 实时市场观察</div>
                 <div class="coin-list">
                     <div class="coin-card">
-                        <h3>USDT (泰达币)</h3>
-                        <p>当前价格: <span id="price-usdt">¥7.24</span></p>
-                        <button onclick="openTrade('USDT')">交易</button>
+                        <div class="coin-name">USDT (泰达币)</div>
+                        <div class="coin-price" id="price-usdt">¥7.24</div>
+                        <button class="btn-trade" onclick="openTrade('USDT')">交易</button>
                     </div>
                     <div class="coin-card">
-                        <h3>USDC (美元币)</h3>
-                        <p>当前价格: <span id="price-usdc">¥7.25</span></p>
-                        <button onclick="openTrade('USDC')">交易</button>
+                        <div class="coin-name">USDC (美元币)</div>
+                        <div class="coin-price" id="price-usdc">¥7.25</div>
+                        <button class="btn-trade" onclick="openTrade('USDC')">交易</button>
                     </div>
                 </div>
             </section>
 
-            <section id="trade-panel" class="trade-panel hidden">
-                <h2 id="trade-title">买入稳定币</h2>
+            <section id="trade-panel" class="panel hidden">
+                <div class="panel-header" id="trade-title">买入</div>
                 <div class="trade-form">
-                    <label>交易数量:</label>
                     <input type="number" id="trade-amount" placeholder="输入数量" min="1">
-                    <p>预计花费: <span id="trade-cost">¥0.00</span></p>
-                    <button id="btn-execute" class="btn-primary">确认买入</button>
-                    <button onclick="closeTrade()" class="btn-secondary">取消</button>
+                    <div class="trade-info">预计花费: <span id="trade-cost">¥0.00</span></div>
+                    <div class="btn-group">
+                        <button id="btn-execute" class="btn-primary">确认执行</button>
+                        <button onclick="closeTrade()" class="btn-secondary">取消</button>
+                    </div>
+                </div>
+            </section>
+        </aside>
+
+        <main class="col-main">
+            <section class="panel">
+                <div class="panel-header">📺 合规教育模块</div>
+                <p class="sub-text">观看视频学习稳定币底层逻辑，获取学习积分。</p>
+                <div class="video-placeholder" onclick="earnPoints(50)">
+                    ▶ 点击播放《防范高收益骗局与非法集资》<br>
+                    <span style="font-size: 12px; color: #cbd5e1; margin-top: 10px; display: block;">(观看完毕奖励 50 积分)</span>
                 </div>
             </section>
 
-            <section class="edu-section">
-                <h2>新手合规小课堂 📺</h2>
-                <div class="video-container">
-                    <div class="video-placeholder">
-                        ▶ 点击播放《认识稳定币与非法集资风险》
+            <section class="panel mt-20">
+                <div class="panel-header">🎯 实战演练场景</div>
+                <div class="task-list">
+                    <div class="task-item">
+                        <div>
+                            <strong>跨境汇款模拟</strong>
+                            <p>使用稳定币完成一笔模拟跨境支付验证。</p>
+                        </div>
+                        <button class="btn-outline">去完成</button>
+                    </div>
+                    <div class="task-item">
+                        <div>
+                            <strong>规避剧烈波动</strong>
+                            <p>在模拟市场大跌前将资产转换为稳定币。</p>
+                        </div>
+                        <button class="btn-outline">去完成</button>
                     </div>
                 </div>
             </section>
         </main>
 
-        <aside class="side-panel">
-            <h2>我的数字资产</h2>
-            <ul class="holdings-list">
-                <li>USDT: <span id="hold-usdt">0.00</span></li>
-                <li>USDC: <span id="hold-usdc">0.00</span></li>
-            </ul>
-            <button onclick="resetAccount()" class="btn-danger" style="margin-top: 20px;">重置账户 (重新领取十万)</button>
+        <aside class="col-right">
+            <section class="panel">
+                <div class="panel-header">💼 我的数字资产</div>
+                <ul class="holdings-list">
+                    <li><span>USDT</span> <span id="hold-usdt" class="text-white">0.00</span></li>
+                    <li><span>USDC</span> <span id="hold-usdc" class="text-white">0.00</span></li>
+                </ul>
+            </section>
+
+            <section class="panel mt-20">
+                <div class="panel-header">🏆 好友资产排行</div>
+                <ul class="rank-list" id="rank-list">
+                    </ul>
+            </section>
+
+            <section class="panel mt-20">
+                <div class="panel-header">🛒 稳界商城</div>
+                <div class="store-grid">
+                    <div class="store-item" onclick="buyItem('skin')">
+                        <div class="icon">👑</div>
+                        <div class="name">高级头像框</div>
+                        <div class="price">500 积分</div>
+                    </div>
+                    <div class="store-item" onclick="buyItem('book')">
+                        <div class="icon">📚</div>
+                        <div class="name">《区块链合规》</div>
+                        <div class="price">¥49.00</div>
+                    </div>
+                    <div class="store-item" onclick="buyItem('expert')">
+                        <div class="icon">👨‍🏫</div>
+                        <div class="name">专家咨询</div>
+                        <div class="price">¥199.00</div>
+                    </div>
+                </div>
+            </section>
         </aside>
     </div>
 
     <div id="tutorial-overlay" class="tutorial-overlay active">
         <div class="tutorial-box">
             <h2>🎉 欢迎来到风险认知实验室！</h2>
-            <p>我们已经向你的账户发放了 <strong>¥100,000</strong> 模拟本金。</p>
-            <p><strong>任务：</strong>尝试根据现实汇率，买入一些 USDT，并观看下方的合规教育视频，了解交易背后的法律风险。</p>
-            <button onclick="closeTutorial()" class="btn-primary">领取资金，开始挑战</button>
+            <p>作为新人，你已获得 <strong>¥100,000</strong> 模拟本金。</p>
+            <ul style="text-align: left; margin: 20px auto; max-width: 400px; color: #cbd5e1; line-height: 1.8;">
+                <li>1. 在左侧观察市场，体验模拟交易。</li>
+                <li>2. 在中间观看视频，赚取学习积分。</li>
+                <li>3. 在右侧商城使用积分/本金兑换装扮与书籍。</li>
+            </ul>
+            <button onclick="closeTutorial()" class="btn-primary" style="width: 100%; font-size: 16px;">开始我的合规之旅</button>
         </div>
     </div>
 
